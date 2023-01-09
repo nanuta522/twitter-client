@@ -27,9 +27,9 @@
         </div>
     </div>
 
-    <Tweet v-for="(tweet, idx) in userTweets" :tweet="tweet" :key="tweet.tweet_id" />
+    <Tweet v-for="tweet in userTweets" :tweet="tweet" :key="tweet.tweet_id" />
 
-    <div class="tweet arrowDown justify-content-center mt-4">
+    <div class="tweet arrowDown justify-content-center mt-5">
         <i class="fas fa-angle-double-down" style="color:rgba(188, 186, 186, 0.897)"></i>
     </div>
 
@@ -59,8 +59,8 @@ export default {
         '$route.params.user_id': {
             async handler() {
                 if (this.$route.params.user_id) {
-                    this.getUserById(this.$route.params.user_id)
-                    this.getTweetsByUser(this.$route.params.user_id)
+                    await this.getUserById(this.$route.params.user_id)
+                    await this.getTweetsByUser(this.$route.params.user_id)
                 }
             },
             immediate: true,

@@ -1,13 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import NotificationsView from '../views/NotificationsView.vue'
-import SavedTweets from '../views/SavedTweets.vue'
+import LikedTweets from '../views/LikedTweets.vue'
+import MyTweets from '../views/MyTweets.vue'
 import UnderConstruction from '../views/UnderConstruction.vue'
 import ComposeView from '../views/ComposeView.vue'
 import ProfileView from '../views/ProfileView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import EditProfileView from '../views/EditProfileView.vue'
 import RetweetView from '../views/RetweetView.vue'
+import CommentView from '../views/CommentView.vue'
+import TweetDetails from '../views/TweetDetails.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -43,14 +46,14 @@ const router = createRouter({
       component: NotificationsView
     },
     {
-      path: '/saved',
+      path: '/saved/:user_id',
       name: 'saved',
-      component: SavedTweets
+      component: LikedTweets
     },
     {
-      path: '/list',
+      path: '/list/:user_id',
       name: 'list',
-      component: SavedTweets
+      component: MyTweets
     },
     {
       path: '/more',
@@ -66,6 +69,16 @@ const router = createRouter({
       path: '/retweet/:tweet_id',
       name: 'retweet',
       component: RetweetView
+    },
+    {
+      path: '/comment/:tweet_id',
+      name: 'comment',
+      component: CommentView
+    },
+    {
+      path: '/tweet/:tweet_id',
+      name: 'tweetDetails',
+      component: TweetDetails
     }
   ]
 })

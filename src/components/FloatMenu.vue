@@ -47,6 +47,7 @@ export default {
 }
 
 .float-menu {
+    width: 10%;
     bottom: 2rem;
     margin-left: 59rem;
 }

@@ -1,9 +1,15 @@
 <template>
     <div class="tweet justify-content-center">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chevron-bar-expand mt-3" style="color:rgba(188, 186, 186, 0.897)"
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" style="color:rgba(188, 186, 186, 0.897)" class="bi bi-three-dots mt-3"
             viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-                d="M3.646 10.146a.5.5 0 0 1 .708 0L8 13.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708zm0-4.292a.5.5 0 0 0 .708 0L8 2.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708zM1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8z" />
+            <path
+                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
         </svg>
     </div>
 </template>
+
+<style scoped>
+.tweet {
+    border: none;
+}
+</style>

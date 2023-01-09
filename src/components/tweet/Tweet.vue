@@ -4,39 +4,43 @@
     <div class="body">
       <div class="top">
         <User v-if="tweet" :user="tweet.user" />
-        <Timestamp v-if="tweet" :timestamp="tweet.timeStamp"/>
+        <Timestamp v-if="tweet" :timestamp="tweet.timeStamp" />
       </div>
-
-      <Message v-if="tweet" :message="tweet.message"/>
-
-      <Actions v-if="tweet" :retweet="tweet"/>
+      <Message v-if="tweet" :message="tweet.message" />
+      <Actions v-if="tweet" :retweet="tweet" />
     </div>
 
-    <router-link to="/"><i class="fa fa-trash" style="color:gray"></i></router-link>
+    <div v-if="tweet && users.length > 0 && tweet.userId === users[0].account_id">
+      <button v-if="tweet" @click="handleDeleteProject" id="likeBtn"><i class="fa fa-trash"
+          style="color:gray"></i></button>
+    </div>
+
   </div>
 </template>
 
 <script>
-import { RouterLink, RouterView } from 'vue-router'
 import ProfileImage from './ProfileImage.vue'
 import User from './User.vue'
 import Timestamp from './Timestamp.vue'
 import Message from './Message.vue'
 import Actions from './Actions.vue'
+import { mapState, mapStores, mapActions } from 'pinia'
+import { useUserStore } from './../../stores/userStore'
+import { useTweetStore } from './../../stores/tweetStore'
 
 export default {
-  created() {
+  /* created() {
     this.user = this.tweet.user
     this.timestamp = this.tweet.timestamp
     this.message = this.tweet.message
-  },
-  data() {
+  }, */
+ /*  data() {
     return {
       user: {},
       timestamp: '',
       message: ''
     }
-  },
+  }, */
   props: {
     tweet: {
       type: Object
@@ -48,6 +52,20 @@ export default {
     Timestamp,
     Message,
     Actions
+  },
+  computed: {
+    ...mapStores(useUserStore),
+    ...mapState(useUserStore, ['users', 'user']),
+    ...mapStores(useTweetStore)
+  },
+  methods: {
+    ...mapActions(useTweetStore, ['deleteTweet', 'getAllTweets', 'getTweetsByUser', 'getTweetsLikedByUser', 'getTweetComments']),
+    async handleDeleteProject() {
+      await this.deleteTweet(this.tweet.tweet_id)
+      this.getAllTweets()
+      this.getTweetsByUser(this.users[0].account_id)
+      this.getTweetsLikedByUser(this.users[0].account_id)
+    }
   }
 }
 </script>
@@ -59,5 +77,12 @@ a {
 
 .tweet {
   padding: 2rem;
+}
+
+button {
+  margin-top: -4.5rem;
+  border: none;
+  background: none;
+  color: none;
 }
 </style>

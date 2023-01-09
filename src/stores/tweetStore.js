@@ -1,6 +1,6 @@
 import { defineStore } from "pinia"
 
-const API_URL = "http://localhost:8083/api"
+const API_URL = "http://localhost:8080/api"
 
 export const useTweetStore = defineStore("tweet", {
     state: () => ({
@@ -12,18 +12,20 @@ export const useTweetStore = defineStore("tweet", {
             parentTweet: null,
             timeStamp: null
         },
-        userTweets: []
+        userTweets: [],
+        likedTweets: [],
+        tweetComments: []
     }),
     actions: {
         async getAllTweets() {
             const response = await fetch(`${API_URL}/tweet/all`)
             const data = await response.json()
-            this.tweets = data
+            this.tweets = data.reverse()
         },
         async getTweetsByUser(user_id) {
             const response = await fetch(`${API_URL}/tweet/user/${user_id}`)
             const data = await response.json()
-            this.userTweets = data
+            this.userTweets = data.reverse()
         },
         async createTweet(message) {
             try {
@@ -34,7 +36,7 @@ export const useTweetStore = defineStore("tweet", {
                         'Access-Control-Allow-Origin': '*'
                     },
                     body: JSON.stringify({
-                        userId: this.tweet.userId, 
+                        userId: this.tweet.userId,
                         message: message,
                     })
                 }
@@ -58,7 +60,7 @@ export const useTweetStore = defineStore("tweet", {
                         'Access-Control-Allow-Origin': '*'
                     },
                     body: JSON.stringify({
-                        user_id: this.user_id,
+                        user_id: user_id,
                         tweet_id: tweet_id,
                     })
                 }
@@ -67,6 +69,51 @@ export const useTweetStore = defineStore("tweet", {
             } catch (err) {
                 console.log(err)
             }
+        },
+        async getTweetsLikedByUser(user_id) {
+            const response = await fetch(`${API_URL}/tweet/likes/${user_id}`)
+            const data = await response.json()
+            this.likedTweets = data
+        },
+        async getTweetComments(parentTweet_id) {
+            const response = await fetch(`${API_URL}/tweet/comments/${parentTweet_id}`)
+            const data = await response.json()
+            this.tweetComments = data
+        },
+        async addComment(user_id, message, parentTweet_id) {
+            try {
+                const requestOptions = {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                    body: JSON.stringify({
+                        userId: user_id,
+                        message: message,
+                    })
+                }
+                const response = await fetch(`${API_URL}/tweet/add-comment/${parentTweet_id}`, requestOptions)
+                return await response.json()
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async deleteTweet(tweet_id) {
+            try {
+                const requestOptions = {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    }
+                }
+                const response = await fetch(`${API_URL}/tweet/${tweet_id}`, requestOptions)
+                this.getAllTweets()
+                return await response.json()
+            } catch (err) {
+                console.log(err)
+            }
         }
-    },
+    }
 })

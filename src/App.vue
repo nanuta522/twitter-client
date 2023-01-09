@@ -11,7 +11,7 @@
       <div class="col-md-6 offset-md-3">
         <main>
           <router-view />
-          <Tweet v-if="tweets.length > 0" v-for="(tweet, idx) in tweets" :tweet="tweet" :key="tweet.tweet_id" />
+          <Tweet v-if="tweets.length > 0" v-for="tweet in tweets" :tweet="tweet" :key="tweet.tweet_id" />
           <FloatMenu />
         </main>
       </div>

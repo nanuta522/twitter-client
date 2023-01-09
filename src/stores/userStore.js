@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-const API_URL = "http://localhost:8083/api"
+const API_URL = "http://localhost:8080/api"
 
 export const useUserStore = defineStore('user', {
     state: () => ({
@@ -60,11 +60,27 @@ export const useUserStore = defineStore('user', {
                         'Access-Control-Allow-Origin': '*'
                     },
                     body: JSON.stringify({
-                       ...user,
-                       profileImg: "https://pbs.twimg.com/profile_images/1012362101510160384/EjayQ10E_400x400.jpg"
+                        ...user,
+                        profileImg: "https://pbs.twimg.com/profile_images/1012362101510160384/EjayQ10E_400x400.jpg"
                     })
                 }
                 const response = await fetch(`${API_URL}/user`, requestOptions)
+                this.getAllUsers()
+                return await response.json()
+            } catch (err) {
+                console.log(err)
+            }
+        },
+        async deleteUser(user_id) {
+            try {
+                const requestOptions = {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    }
+                }
+                const response = await fetch(`${API_URL}/user/${user_id}`, requestOptions)
                 this.getAllUsers()
                 return await response.json()
             } catch (err) {

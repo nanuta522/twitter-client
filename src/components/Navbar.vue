@@ -31,13 +31,13 @@
                 </div>
             </router-link>
 
-            <router-link to="/saved">
+            <router-link v-if="users.length > 0" :to="`/saved/${users[0].account_id}`">
                 <div class="row button-icon">
                     <IconBookMark />
                 </div>
             </router-link>
 
-            <router-link to="list">
+            <router-link v-if="users.length > 0" :to="`/list/${users[0].account_id}`">
                 <div class="row button-icon">
                     <IconList />
                 </div>
@@ -62,8 +62,8 @@ import IconBookMark from '../components/icons/IconBookMark.vue'
 import IconList from '../components/icons/IconList.vue'
 import IconMore from '../components/icons/IconMore.vue'
 import IconLogo from './icons/IconLogo.vue'
-import { mapState, mapActions } from "pinia"
-import { useUserStore } from "./../stores/userStore"
+import { mapState, mapActions } from 'pinia'
+import { useUserStore } from './../stores/userStore'
 
 export default {
     data() {
