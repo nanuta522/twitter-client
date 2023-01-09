@@ -3,7 +3,7 @@
         <div>
             <ul class="dropdown-menu" id="myMenu">
                 <li><router-link to="/"><a class="dropdown-item">Go to Home</a></router-link></li>
-                <li><router-link to="/profile"><a class="dropdown-item">Go to my Profile</a></router-link></li>
+                <li><router-link v-if="users.length > 0" :to="`/profile/${users[0].account_id}`"><a class="dropdown-item">Go to my Profile</a></router-link></li>
                 <li><router-link to="/compose/tweet"><a class="dropdown-item">Compose Tweet</a></router-link></li>
             </ul>
         </div>
@@ -15,23 +15,29 @@
 </template>
 
 <script>
-import IconBell from './icons/IconBell.vue';
-import IconHome from './icons/IconHome.vue';
-import TweetButton from './TweetButton.vue';
+import IconBell from './icons/IconBell.vue'
+import IconHome from './icons/IconHome.vue'
+import TweetButton from './TweetButton.vue'
+import { mapState, mapStores, mapActions } from 'pinia'
+import { useUserStore } from './../stores/userStore'
 
 export default {
     methods: {
         stylishMenu() {
-            const x = document.getElementById("myMenu");
+            const x = document.getElementById("myMenu")
             if (x.style.display === "none") {
-                x.style.display = "block";
+                x.style.display = "block"
             }
             else {
-                x.style.display = "none";
+                x.style.display = "none"
             }
         }
     },
-    components: { IconHome, IconBell, TweetButton }
+    components: { IconHome, IconBell, TweetButton },
+    computed: {
+        ...mapStores(useUserStore),
+        ...mapState(useUserStore, ['users'])
+    }
 }
 </script>
 

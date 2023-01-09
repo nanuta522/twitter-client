@@ -12,7 +12,7 @@
       <Actions v-if="tweet" :retweet="tweet"/>
     </div>
 
-    <router-link to="/tweet/{id}"><i class="fa fa-trash" style="color:gray"></i></router-link>
+    <router-link to="/"><i class="fa fa-trash" style="color:gray"></i></router-link>
   </div>
 </template>
 

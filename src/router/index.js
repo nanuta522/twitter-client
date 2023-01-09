@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import HomeView from '../views/HomeView.vue'
 import NotificationsView from '../views/NotificationsView.vue'
 import SavedTweets from '../views/SavedTweets.vue'
 import UnderConstruction from '../views/UnderConstruction.vue'
@@ -13,7 +14,8 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home'
+      name: 'home',
+      component: HomeView
     },
     {
       path: '/profile/:user_id',

@@ -52,7 +52,6 @@ export default {
             async handler() {
                 if (this.$route.params.tweet_id) {
                     const retweet = await this.getTweetById(this.$route.params.tweet_id)
-                    console.log('RETWEET: ', this.tweet)
                     this.message = this.tweet.message
                 }
             },

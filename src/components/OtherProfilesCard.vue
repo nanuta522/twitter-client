@@ -7,7 +7,7 @@
             </div>
             <h4 class="mb-2">{{ user.name }}</h4>
             <p class="text-muted mb-4">@{{ user.username }}</p>
-            <router-link to="#"><button type="button" class="btn btn-danger btn-rounded btn-lg">
+            <router-link to="/"><button type="button" class="btn btn-danger btn-rounded btn-lg">
                     Delete
                 </button></router-link>
         </div>

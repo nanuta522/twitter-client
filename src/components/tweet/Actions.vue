@@ -10,7 +10,7 @@
         <button v-else-if="!likeSelected(retweet)" id="likeBtn"><i @click="handleClick()" class="far fa-heart"
                 style="color:rgb(29, 155, 240)"></i> {{ retweet.userLikes.length }}</button>
 
-        <router-link to="#"><i class="fas fa-share" style="color:rgb(29, 155, 240)"></i></router-link>
+        <router-link to="/"><i class="fas fa-share" style="color:rgb(29, 155, 240)"></i></router-link>
     </div>
 </template>
 

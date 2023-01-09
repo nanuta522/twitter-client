@@ -42,10 +42,6 @@ import { useTweetStore } from '../stores/tweetStore'
 import { useUserStore } from './../stores/userStore'
 
 export default {
-    data() {
-        return {
-        }
-    },
     components: {
         Tweet
     },
