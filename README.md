@@ -1,6 +1,6 @@
 ![image](https://user-images.githubusercontent.com/83771741/206526399-63d0c851-218a-4320-8420-b538723e9e49.png)
 
-# vue-project
+# Twitter-vue-project
 
 This template should help get you started developing with Vue 3 in Vite.
 
