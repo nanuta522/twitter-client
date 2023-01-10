@@ -7,7 +7,7 @@
         <Timestamp v-if="tweet" :timestamp="tweet.timeStamp" />
       </div>
       <Message v-if="tweet" :message="tweet.message" />
-      <Actions v-if="tweet" :retweet="tweet" :parentTweet="parentTweet"/>
+      <Actions v-if="tweet" :retweet="tweet" :parentTweet="parentTweet" />
     </div>
 
     <div v-if="tweet && users.length > 0 && tweet.userId === users[0].account_id">
@@ -29,24 +29,12 @@ import { useUserStore } from './../../stores/userStore'
 import { useTweetStore } from './../../stores/tweetStore'
 
 export default {
-  /* created() {
-    this.user = this.tweet.user
-    this.timestamp = this.tweet.timestamp
-    this.message = this.tweet.message
-  }, */
- /*  data() {
-    return {
-      user: {},
-      timestamp: '',
-      message: ''
-    }
-  }, */
   props: {
     tweet: {
       type: Object
     },
     parentTweet: {
-      type: Object 
+      type: Object
     }
   },
   components: {
@@ -59,7 +47,8 @@ export default {
   computed: {
     ...mapStores(useUserStore),
     ...mapState(useUserStore, ['users', 'user']),
-    ...mapStores(useTweetStore)
+    ...mapStores(useTweetStore),
+    ...mapState(useTweetStore, ['tweetComments']),
   },
   methods: {
     ...mapActions(useTweetStore, ['deleteTweet', 'getAllTweets', 'getTweetsByUser', 'getTweetsLikedByUser', 'getTweetComments']),

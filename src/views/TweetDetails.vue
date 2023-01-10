@@ -1,5 +1,5 @@
 <template>
-    <Tweet :tweet="tweet" />
+    <Tweet class="super" :tweet="tweet" />
 
     <Tweet v-for="myTweet in tweetComments" :tweet="myTweet" :parentTweet="tweet" :key="myTweet.tweet_id" />
 
@@ -36,8 +36,14 @@ export default {
                     await this.getTweetComments(this.$route.params.tweet_id)
                 }
             },
-            immediate: true,
-        },
+            immediate: true
+        }
+    },
+    async mounted() {
+        if (this.tweet) {
+            await this.getTweetComments(this.tweet.tweet_id)
+        }
+        this.number = this.tweetComments.length
     }
 }
 </script>
@@ -45,5 +51,9 @@ export default {
 <style scoped>
 .tweet.arrowDown {
     border: none;
+}
+
+.super {
+    background-color: rgba(236, 236, 236, 0.29);
 }
 </style>

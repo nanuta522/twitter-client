@@ -1,7 +1,7 @@
 <template>
     <div class="actions">
-        <router-link :to="`/tweet/${retweet.tweet_id}`"><i class="far fa-comment"
-                style="color:rgb(29, 155, 240)"></i></router-link>
+        <router-link :to="`/tweet/${retweet.tweet_id}`"><i class="far fa-comment" style="color:rgb(29, 155, 240)"></i>
+            {{ retweet.numComments }}</router-link>
 
         <router-link v-if="retweet" :to="`/retweet/${retweet.tweet_id}`"><i class="fas fa-retweet"
                 style="color:rgb(29, 155, 240)"></i></router-link>
@@ -57,8 +57,9 @@ export default {
                 this.getAllTweets()
                 this.getTweetsByUser(this.users[0].account_id)
                 this.getTweetsLikedByUser(this.users[0].account_id)
-                if (this.parentTweet)
+                if (this.parentTweet) {
                     this.getTweetComments(this.parentTweet.tweet_id)
+                }
                 if (this.tweet.tweet_id === this.tweetLiked.tweet_id)
                     this.getTweetById(this.tweet.tweet_id)
             }
@@ -80,5 +81,10 @@ button {
     border: none;
     background: none;
     color: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
 }
 </style>

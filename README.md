@@ -1,6 +1,9 @@
 ![image](https://user-images.githubusercontent.com/83771741/206526399-63d0c851-218a-4320-8420-b538723e9e49.png)
 
 # Twitter vue-project
+Twitter is a microblogging and social networking service on which users post and interact with messages known as "tweets".
+
+This app have 5 blocks or microservices which perform different task inside the app. Twitter-catalog-service works as the glue or the bridge that integrates these separate microservices, and the api-gateway file is a the one who sits between the client and the microservices to act as a reverse proxy, routing requests from clients to services.
 
 This template should help get you started developing with Vue 3 in Vite.
 
