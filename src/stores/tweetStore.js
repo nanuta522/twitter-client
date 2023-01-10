@@ -5,13 +5,7 @@ const API_URL = "http://localhost:8080/api"
 export const useTweetStore = defineStore("tweet", {
     state: () => ({
         tweets: [],
-        tweet: {
-            userId: 1,
-            message: '',
-            userLikes: null,
-            parentTweet: null,
-            timeStamp: null
-        },
+        tweet: null,
         userTweets: [],
         likedTweets: [],
         tweetComments: []

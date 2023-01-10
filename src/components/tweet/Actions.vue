@@ -1,10 +1,10 @@
 <template>
     <div class="actions">
-        <router-link :to="`/tweet/${retweet.tweet_id}`"><i class="far fa-comment" style="color:rgb(29, 155, 240)"></i>
-            {{ retweet.user.length }}</router-link>
+        <router-link :to="`/tweet/${retweet.tweet_id}`"><i class="far fa-comment"
+                style="color:rgb(29, 155, 240)"></i></router-link>
 
         <router-link v-if="retweet" :to="`/retweet/${retweet.tweet_id}`"><i class="fas fa-retweet"
-                style="color:rgb(29, 155, 240)"></i>{{ retweet.parent_tweet_id }}</router-link>
+                style="color:rgb(29, 155, 240)"></i></router-link>
 
         <button v-if="likeSelected(retweet)" id="likeBtn"><i @click="handleClick()" class="far fa-heart"
                 style="color:rgb(236, 26, 89)"></i> {{ retweet.userLikes.length }}</button>
@@ -26,11 +26,15 @@ import { useTweetStore } from './../../stores/tweetStore'
 export default {
     data() {
         return {
-            tweetLiked: {}
+            tweetLiked: {},
+            myRetweet: {}
         }
     },
     props: {
         retweet: {
+            type: Object
+        },
+        parentTweet: {
             type: Object
         }
     },
@@ -38,14 +42,14 @@ export default {
         ...mapStores(useUserStore),
         ...mapState(useUserStore, ['users']),
         ...mapStores(useTweetStore),
-        ...mapState(useUserStore, ['tweet', 'tweetComments'])
+        ...mapState(useTweetStore, ['tweet', 'tweetComments'])
     },
-    async mounted() {
+    async created() {
         this.getAllUsers()
     },
     methods: {
         ...mapActions(useUserStore, ['getAllUsers']),
-        ...mapActions(useTweetStore, ['likeTweet', 'getAllTweets', 'getTweetsByUser', 'getTweetsLikedByUser', 'getTweetComments']),
+        ...mapActions(useTweetStore, ['getTweetById', 'likeTweet', 'getAllTweets', 'getTweetsByUser', 'getTweetsLikedByUser', 'getTweetComments']),
         async handleClick() {
             if (this.users && this.retweet) {
                 this.tweetLiked = await this.likeTweet(this.users[0].account_id, this.retweet.tweet_id)
@@ -53,6 +57,10 @@ export default {
                 this.getAllTweets()
                 this.getTweetsByUser(this.users[0].account_id)
                 this.getTweetsLikedByUser(this.users[0].account_id)
+                if (this.parentTweet)
+                    this.getTweetComments(this.parentTweet.tweet_id)
+                if (this.tweet.tweet_id === this.tweetLiked.tweet_id)
+                    this.getTweetById(this.tweet.tweet_id)
             }
         },
         likeSelected(tweet) {

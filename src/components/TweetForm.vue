@@ -10,10 +10,15 @@
                             style="background: #fff;" :placeholder="`What's up? @${users[0].username}`"></textarea>
                     </div>
 
-                    <div v-else-if="tweet.user && $route.name === 'comment'" class="form-outline w-100">
+                    <div v-else-if="tweet && $route.name === 'comment'" class="form-outline w-100">
                         <textarea v-model="comment" class="form-control" id="textAreaExample" rows="4"
                             style="background: #fff;" v-if="tweet"
                             :placeholder="`Respond to @${tweet.user.username}`"></textarea>
+                    </div>
+
+                    <div v-else class="form-outline w-100">
+                        <textarea v-model="comment" class="form-control" id="textAreaExample" rows="4"
+                            style="background: #fff;" :placeholder="`What's up? @${users[0].username}`"></textarea>
                     </div>
                 </div>
                 <div class="row d-flex justify-content-end">

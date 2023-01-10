@@ -1,7 +1,7 @@
 <template>
     <Tweet :tweet="tweet" />
 
-    <Tweet v-for="tweet in tweetComments" :tweet="tweet" :key="tweet.tweet_id" />
+    <Tweet v-for="myTweet in tweetComments" :tweet="myTweet" :parentTweet="tweet" :key="myTweet.tweet_id" />
 
     <div class="tweet arrowDown justify-content-center mt-5">
         <i class="fas fa-angle-double-down" style="color:rgba(188, 186, 186, 0.897)"></i>

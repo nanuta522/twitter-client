@@ -7,7 +7,7 @@
         <Timestamp v-if="tweet" :timestamp="tweet.timeStamp" />
       </div>
       <Message v-if="tweet" :message="tweet.message" />
-      <Actions v-if="tweet" :retweet="tweet" />
+      <Actions v-if="tweet" :retweet="tweet" :parentTweet="parentTweet"/>
     </div>
 
     <div v-if="tweet && users.length > 0 && tweet.userId === users[0].account_id">
@@ -44,6 +44,9 @@ export default {
   props: {
     tweet: {
       type: Object
+    },
+    parentTweet: {
+      type: Object 
     }
   },
   components: {
